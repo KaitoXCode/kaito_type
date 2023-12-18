@@ -18,6 +18,16 @@ async fn quick_dev() -> Result<()> {
             "pwd": "welcome"
         }),
     );
-    let _ = req_login.await?.print().await;
+    let _ = req_login.await?.print().await?;
+
+    let req_create_script = hc.do_post(
+        "/api/scripts",
+        json!({
+            "text": "Script AAA"
+        }),
+    );
+    let _ = req_create_script.await?.print().await?;
+    // hc.do_delete("/api/scripts/1").await?.print().await?;
+    hc.do_get("/api/scripts").await?.print().await?;
     Ok(())
 }
