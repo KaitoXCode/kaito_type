@@ -8,7 +8,7 @@ use std::{
     u64,
 };
 
-// region:      --- Ticket Types
+// region:      --- Script Types
 #[derive(Clone, Debug, Serialize)]
 pub struct Script {
     pub id: u64,
@@ -21,9 +21,9 @@ pub struct ScriptForCreate {
     pub text: String,
 }
 
-// endregion:   --- Ticket Types
+// endregion:   --- Script Types
 
-// region:      -- Model Controller
+// region:      --- Model Controller
 #[derive(Clone)]
 pub struct ModelController {
     // TODO: make real db store

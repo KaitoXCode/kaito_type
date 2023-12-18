@@ -24,8 +24,6 @@ mod web;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // watch application level logs: cargo watch -q -c -w src/ -x run
-    // watch test level logs: cargo watch -q -c -w tests/ -x "test -q quick_dev -- --nocapture"
     println!("->> Launching Backend...");
     // initialise modelcontroller
     let mc = model::ModelController::new().await?;
@@ -52,12 +50,6 @@ async fn main() -> Result<()> {
         .await
         .unwrap();
     Ok(())
-    // // build our application with a single route
-    // let app = Router::new().route("/hello", get(|| async { Html("Hello <strong>World!!!</strong>") }));
-    //
-    // // run our app with hyper, listening glabally on port 3000
-    // let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    // axum::serve(listener, app).await.unwrap();
 }
 
 // region:      --- Start Server
