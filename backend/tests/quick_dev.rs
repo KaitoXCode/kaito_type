@@ -3,6 +3,8 @@ use serde_json::json;
 
 #[tokio::test]
 async fn quick_dev() -> Result<()> {
+    // watch application level logs: cargo watch -q -c -w src/ -x run
+    // watch test level logs: cargo watch -q -c -w tests/ -x "test -q quick_dev -- --nocapture"
     let hc = httpc_test::new_client("http://localhost:3000")?;
 
     hc.do_get("/hello?name=Kaito").await?.print().await?;

@@ -14,6 +14,8 @@ mod web;
 
 #[tokio::main]
 async fn main() {
+    // watch application level logs: cargo watch -q -c -w src/ -x run
+    // watch test level logs: cargo watch -q -c -w tests/ -x "test -q quick_dev -- --nocapture"
     println!("Launching Backend...");
     // define routes:
     let routes_all = Router::new()
