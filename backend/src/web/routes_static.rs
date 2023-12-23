@@ -1,0 +1,17 @@
+// region:      --- Modules
+use crate::config;
+
+use axum::handler::HandlerWithoutStateExt;
+use axum::http::StatusCode;
+use axum::routing::{any_service, MethodRouter};
+use tower_http::services::ServeDir;
+// endregion:   --- Modules
+
+// NOTE: can just return a MethodRouter rather than full Router
+// since ServeDir is a service
+pub fn serve_dir() -> MethodRouter {
+    async fn handle_404() -> (StatusCode, &'static str) {
+        (StatusCode::NOT_FOUND, "Resorce not found")
+    }
+    any_service(ServeDir::new(&config().WEB_FOLDER).not_found_service(handle_404.into_service()))
+}
