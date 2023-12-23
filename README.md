@@ -11,10 +11,12 @@ docker postgres db data <br /> (4) maybe loosen auth reqs for logged off access
 
 git ignored /backend/.cargo/config.toml file
 
-SERVICE_DB_URL: db connection url. <br /> SERVICE_PWD_KEY: for pwd encryption.
-<br /> SERVICE_TOKEN_KEY: for token generation and validation. <br />
-SERVICE_TOKEN_DURATION_SEC: for token lifetime. <br /> SERVICE_WEB_FOLDER:
-static html location (always: "web-folder/").
+SERVICE_DB_URL: docker postgres db connection url. <br /> SERVICE_PWD_KEY: for
+pwd encryption (can gen using examples/gen_key).
+<br /> SERVICE_TOKEN_KEY: for token generation and validation (can gen using
+examples/gen_key). <br /> SERVICE_TOKEN_DURATION_SEC: for token lifetime in
+seconds. <br /> SERVICE_WEB_FOLDER: static html location (always:
+"web-folder/").
 
 ### dev start db
 
