@@ -1,9 +1,13 @@
 [package]
 name = "backend"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 
 [dependencies]
+# HTMX related
+# link templates to structs
+askama = "0.12"
+# async
 tokio = { version = "1", features = ["full"] }
 # Serde / json
 serde = { version = "1", features = ["derive"] }
