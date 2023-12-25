@@ -22,12 +22,20 @@ use crate::web::mw_res_map::mw_response_map;
 use crate::web::{routes_login, routes_static, rpc};
 // use axum::response::Html; // for hello routes
 // use axum::routing::get; // for hello routes
-use axum::{middleware, Router};
+use axum::{
+    http::StatusCode,
+    middleware,
+    response::{Html, IntoResponse, Response},
+    routing::get,
+    Router,
+};
 use tokio::net::TcpListener; // for 0.7
                              // use std::net::SocketAddr; // for 0.6
 use tower_cookies::CookieManagerLayer;
 use tracing::info;
 use tracing_subscriber::EnvFilter;
+
+use askama::Template;
 // endregion:   --- Modules
 
 #[tokio::main]
@@ -55,13 +63,15 @@ async fn main() -> Result<()> {
         // .merge(routes_hello)
         .merge(routes_login::routes(mm.clone()))
         .nest("/api", routes_rpc)
+        .route("/", get(root_home))
+        .route("/login-page", get(login_page))
         .layer(middleware::map_response(mw_response_map))
         .layer(middleware::from_fn_with_state(mm.clone(), mw_ctx_resolve))
         .layer(CookieManagerLayer::new())
         .fallback_service(routes_static::serve_dir());
     // region: --- Start Server 0.7
     let listner = TcpListener::bind("127.0.0.1:3000").await.unwrap();
-    info!("LISTENING on {:?}\n", listner.local_addr());
+    info!("LISTENING on {:?}\n", listner.local_addr().unwrap());
     axum::serve(listner, routes_all.into_make_service())
         .await
         .unwrap();
@@ -75,3 +85,48 @@ async fn main() -> Result<()> {
     //     .unwrap();
     // Ok(())
 }
+
+// region:      --- Hello
+async fn root_home() -> impl IntoResponse {
+    let template = RootTemplate {};
+    HtmlTemplate(template)
+}
+
+#[derive(Template)]
+#[template(path = "pages/root.html")]
+struct RootTemplate;
+
+/// A wrapper type that we'll use to encapsulate HTML parsed by askama into valid HTML for axum to serve.
+struct HtmlTemplate<T>(T);
+
+/// Allows us to convert Askama HTML templates into valid HTML for axum to serve in the response.
+impl<T> IntoResponse for HtmlTemplate<T>
+where
+    T: Template,
+{
+    fn into_response(self) -> Response {
+        // Attempt to render the template with askama
+        match self.0.render() {
+            // If we're able to successfully parse and aggregate the template, serve it
+            Ok(html) => Html(html).into_response(),
+            // If we're not, return an error or some bit of fallback HTML
+            Err(err) => (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                format!("Failed to render template. Error: {}", err),
+            )
+                .into_response(),
+        }
+    }
+}
+// endregion:   --- Hello
+
+// region:      --- Login page
+async fn login_page() -> impl IntoResponse {
+    let template = LoginPageTemplate {};
+    HtmlTemplate(template)
+}
+
+#[derive(Template)]
+#[template(path = "pages/login/login-page.html")]
+struct LoginPageTemplate;
+// endregion:   --- Login page
