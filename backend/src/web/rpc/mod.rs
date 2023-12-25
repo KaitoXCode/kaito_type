@@ -5,7 +5,9 @@ use crate::{
     ctx::Ctx,
     model::ModelManager,
     web::{
-        rpc::script_rpc::{create_script, delete_script, list_scripts, update_script},
+        rpc::script_rpc::{
+            create_script, delete_script, get_script_rand, list_scripts, update_script,
+        },
         Error, Result,
     },
 };
@@ -109,6 +111,7 @@ async fn _rpc_handler(ctx: Ctx, mm: ModelManager, rpc_req: RpcRequest) -> Result
         // Script RPC methods
         "create_script" => exec_rpc_fn!(create_script, ctx, mm, rpc_params),
         "list_scripts" => exec_rpc_fn!(list_scripts, ctx, mm),
+        "get_script_rand" => exec_rpc_fn!(get_script_rand, ctx, mm),
         "update_script" => exec_rpc_fn!(update_script, ctx, mm, rpc_params),
         "delete_script" => exec_rpc_fn!(delete_script, ctx, mm, rpc_params),
         // fallback as err

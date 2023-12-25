@@ -7,6 +7,8 @@ use crate::web::Result;
 
 use super::{ParamsForCreate, ParamsForUpdate, ParamsIded};
 
+use rand::seq::SliceRandom;
+
 // end of line here, fns consume ctx and mm
 
 pub async fn create_script(
@@ -25,6 +27,20 @@ pub async fn create_script(
 pub async fn list_scripts(ctx: Ctx, mm: ModelManager) -> Result<Vec<Script>> {
     let scripts = ScriptBmc::list(&ctx, &mm).await?;
     Ok(scripts)
+}
+
+pub async fn get_script_rand(ctx: Ctx, mm: ModelManager) -> Result<Script> {
+    let _scripts = ScriptBmc::list(&ctx, &mm).await?;
+    // FIXME: make this real after adding some relevant egs in db seed
+    let scripts = vec![Script {
+        id: 1,
+        text: String::from("then there was in a little house on the road"),
+    }];
+    use crate::web::error::Error;
+    let res = scripts
+        .choose(&mut rand::thread_rng())
+        .ok_or(Error::LoginFailUsernameNotFound)?;
+    Ok(res.clone())
 }
 
 pub async fn update_script(
