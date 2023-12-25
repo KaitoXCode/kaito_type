@@ -52,7 +52,9 @@ async fn main() -> Result<()> {
         json!({
             "id": 1,
             "method": "delete_script",
-            "id": 1001 // hardcoded script id
+            "params": {
+                "id": 1001 // hardcoded script id
+            }
         }),
     );
     req_delete_script.await?.print().await?;
@@ -65,6 +67,15 @@ async fn main() -> Result<()> {
         }),
     );
     req_list_scripts.await?.print().await?;
+
+    let req_get_script_rand = hc.do_post(
+        "/api/rpc",
+        json!({
+            "id": 1,
+            "method": "get_script_rand"
+        }),
+    );
+    req_get_script_rand.await?.print().await?;
 
     let req_logoff = hc.do_post(
         "/api/logoff",
