@@ -1,0 +1,92 @@
+<!-- use base -->
+{% extends "layouts/base.html" %}
+<!-- head: title -->
+{% block title %}KaitoType!{% endblock %}
+<!-- head: metadata (with css) -->
+{% block head %}
+<!-- define css -->
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  .column {
+    display: flex;
+    float: left;
+  }
+  .left {
+    width: 29%
+  }
+  .middle {
+    width: 48%
+  }
+  .right {
+    width: 19%
+  }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  div {
+    margin:auto;
+  }
+</style>
+{% endblock %}
+
+<!-- main body -->
+{% block content %}
+<div id="mainPage">
+  <div id="scriptConfig" style="background-color: #F2F3F4" class="row">
+    <div id="charOptionts" style="background-color: #E5E7E9; padding:1px; margin:5px" class="column left">
+      <div id="specialOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">special option</p>
+      </div>
+      <div id="numberOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">number option</p>
+      </div>
+    </div>
+    <!-- <div class="spacer leftSpacer">spacer1</div> -->
+    <div id="modeOptions" style="background-color: #E5E7E9; padding:1px; margin:5px" class="column middle">
+      <div id="timeOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">time option</p>
+      </div>
+      <div id="wordsOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">words option</p>
+      </div>
+      <div id="customOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">custom option</p>
+      </div>
+    </div>
+    <!-- <div class="spacer rightSpacer">spacer2</div> -->
+    <div id="timeOptions" style="background-color: #E5E7E9; padding:1px; margin:5px" class="column right">
+      <div id="fifteenSecOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">15s</p>
+      </div>
+      <div id="thirtySecOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">30s</p>
+      </div>
+      <div id="sixtySecOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">60s</p>
+      </div>
+      <div id="oneTwentySecOpt" class="column">
+        <p style="text-align:center; font-size:2vw;">120s</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div id="outerScriptArea" style="background-color: #F2F3F4;padding:5px;">
+    <div id="innerScriptArea" style="background-color: #E5E7E9;">
+      <p style="font-size:2vw;">TODO: script area</p>
+    </div>
+  </div>
+  <!-- <button -->
+  <!--   type="button" -->
+  <!--   hx-get="/api/hello" -->
+  <!--   hx-swap="innerHtml" -->
+  <!--   class="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" -->
+  <!-- > -->
+  <!--   Say hello -->
+  <!-- </button> -->
+</div>
+{% endblock %}
+
