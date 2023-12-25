@@ -18,7 +18,6 @@ use tower_cookies::{Cookie, Cookies};
 use tracing::debug;
 // endregion:   --- Modules
 
-#[allow(dead_code)] //FIXME: rm when we have rpc
 pub async fn mw_ctx_require(ctx: Result<Ctx>, req: Request<Body>, next: Next) -> Result<Response> {
     debug!("{:<12} - mw_ctx_require - {ctx:?}", "MIDDLEWARE");
     ctx?;
