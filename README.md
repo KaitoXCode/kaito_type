@@ -8,32 +8,89 @@
 
 (2) (for prod only) persist docker postgres db data <br />
 
+(3) git actions <br />
+
+(4) pipelines <br />
+
 ## frontend
 
 ### done
 
-(v1) add simple html home/root and login pages. incorporate successful (json)
-authentication with demo user <br />
+(v1)
+
+    (a) add simple html home/root and login pages. <br />
+
+    (b) incorporate working (json /api/v1) authentication with demo user <br />
+
+(v2)
+
+    (a) move css to styles.css in assets <br />
+
+    (b) border styles for divs and buttons + general styles across client <br />
+
+    (c) add favicon <br />
+
+    (d) replace script html component with htmx dynamic component (/api/v2) <br />
 
 ### todos
 
-(v2) replace some html components with htmx dynamic components <br />
+(v3)
+
+    (a) incorporate logoff and create user for client (/api/v1) <br />
+
+    (e) use tailwind for css (add `<script src="https://cdn.tailwindcss.com"></script>` to the head)<br />
+
+(v4)
+
+    (c) convert login page to dynamic aside component (/api/v2) <br />
 
 ## backend
 
 ### done
 
-(v1) make a simple rust/axum backend. simple context (ctx), logging, (fake)
-auth, script models, model controller, all-in-one error file, login routes,
-script routes, quick_dev testing <br />
+(v1)
 
-(v2) make a more complex rust/axum backend. configs, docker db (w/
-create;recreate;seeding), db models, better logging, modular errors, api
-context, auth, cookies, encryption, RPC API, response mapper, unit tests <br />
+    (a) (simple) rust/axum backend <br />
+
+    (b) (simple) context:ctx <br />
+
+    (c) (simple) logging <br />
+
+    (e) (fake) model controller, script models <br />
+
+    (f) (simple) testing: quick_dev testing <br />
+
+    (g) (simple) routes: login (fake auth) and script <br />
+
+(v2)
+
+    (a) (complex) rust/axum backend <br />
+
+    (b) configs, better logging, modular errors, api context <br />
+
+    (c) docker db (w/create;recreate;seeding), db models <br />
+
+    (d) (real) auth, cookies, encryption <br />
+
+    (e) (v1 endpoints) RPC API <br />
+
+    (f) response mapper <br />
+
+    (g) some unit tests <br />
 
 ### todos
 
-(v3) dynamic content for htmx calls <br />
+(v3)
+
+    (a) serve assets directory for frontend <br />
+
+    (b) serve html templates using askama <br />
+
+    (c) nest all json transactions with /api/v1 and add/nest html transactions with /api/v2 <br />
+
+    (d) add json logoff and create user (/api/v1) <br />
+
+    (e) working no-auth dynamic content (htmx) call for script getter route /api/v2 <br />
 
 ### envs
 
