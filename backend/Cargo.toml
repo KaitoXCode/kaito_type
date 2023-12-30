@@ -6,7 +6,8 @@ edition = "2021"
 [dependencies]
 # HTMX related
 # link templates to structs
-askama = "0.12"
+askama = { version = "0.12", features = ["with-axum"] }
+askama_axum = "0.4"
 # async
 tokio = { version = "1", features = ["full"] }
 # Serde / json
