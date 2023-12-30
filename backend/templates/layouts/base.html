@@ -8,37 +8,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Allow any inheriting page to set it's own title -->
     <title>{% block title %}{{ title }}{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <!-- FIXME: load favicon -->
+    <link href="assets/imgs/favicon.ico" rel="icon" type="image/x-icon">
     <!-- htmx from the unpkg CDN - your mileage may vary -->
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
-    <style>body {font-family: 'Courier New', monospace;}</style>
+    <!-- load css styles -->
+    <link href="assets/css/styles.css" rel="stylesheet" type="text/css">
     <!-- import login button -->
-    <script src="jquery.js"></script>
-    <script>
-      $(function()){
-        $("#loginButton").load("/templates/modules/login.html");
-      });
-    </script>
+    <!-- <script> -->
+    <!--   $(function()){ -->
+    <!--     $("#loginButton").load("/templates/modules/login.html"); -->
+    <!--   }); -->
+    <!-- </script> -->
     <!-- Allow any inheriting page to extend head with additional assets -->
     {% block head %}{% endblock %}
   </head>
-  <body style="background-color: #222625">
+  <body id=mainBody>
     <!-- main header used across all pages -->
     <header>
-      <!-- <h1 style="color:white;">Kaito<b>Type</b>!</h1> -->
+    <nav>
       <a href="/" title="Go to root home page">
-        <h1 style="color:white;font-size:2em;margin:10px;">
+        <h1 id="mainHeading" class="main">
           &#127754 Kaito<b>Type</b> &#127754
         </h1>
       </a>
-    <nav>
       <ul>
-        <li>
-          <a href="/" style="color:white;font-size:2vw">Home </a>
-        </li>
-        <li>
-          <a href="/login-page" style="color:white;font-size:2vw">Login </a>
-        </li>
+        <li><button><a href="/">Home </a></button></li>
+        <li class="last"><button><a href="/login-page">Login </a></button></li>
       </ul>
     </nav>
     </header>
@@ -49,8 +45,8 @@
     </main>
     <br>
     <footer>
-      <p style="font-size:2vw">Author: Gerhard Rahn</p>
-      <p style="font-size:2vw">Github: <a href="https://github.com/KaitoXCode">KaitoXCode</a></p>
+      <p>Author: Gerhard Rahn</p>
+      <p>Github: <a href="https://github.com/KaitoXCode">KaitoXCode</a></p>
     </footer>
   </body>
 </html>
