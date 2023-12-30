@@ -18,31 +18,32 @@
 
 (v1)
 
-    (a) add simple html home/root and login pages. <br />
+(a) add simple html home/root and login pages. <br />
 
-    (b) incorporate working (json /api/v1) authentication with demo user <br />
+(b) incorporate working (json /api/v1) authentication with demo user <br />
 
 (v2)
 
-    (a) move css to styles.css in assets <br />
+(a) move css to styles.css in assets <br />
 
-    (b) border styles for divs and buttons + general styles across client <br />
+(b) border styles for divs and buttons + general styles across client <br />
 
-    (c) add favicon <br />
+(c) add favicon <br />
 
-    (d) replace script html component with htmx dynamic component (/api/v2) <br />
+(d) replace script html component with htmx dynamic component (/api/v2) <br />
 
 ### todos
 
 (v3)
 
-    (a) incorporate logoff and create user for client (/api/v1) <br />
+(a) incorporate logoff and create user for client (/api/v1) <br />
 
-    (e) use tailwind for css (add `<script src="https://cdn.tailwindcss.com"></script>` to the head)<br />
+(e) use tailwind for css (add
+`<script src="https://cdn.tailwindcss.com"></script>` to the head)<br />
 
 (v4)
 
-    (c) convert login page to dynamic aside component (/api/v2) <br />
+(c) convert login page to dynamic aside component (/api/v2) <br />
 
 ## backend
 
@@ -50,47 +51,49 @@
 
 (v1)
 
-    (a) (simple) rust/axum backend <br />
+(a) (simple) rust/axum backend <br />
 
-    (b) (simple) context:ctx <br />
+(b) (simple) context:ctx <br />
 
-    (c) (simple) logging <br />
+(c) (simple) logging <br />
 
-    (e) (fake) model controller, script models <br />
+(e) (fake) model controller, script models <br />
 
-    (f) (simple) testing: quick_dev testing <br />
+(f) (simple) testing: quick_dev testing <br />
 
-    (g) (simple) routes: login (fake auth) and script <br />
+(g) (simple) routes: login (fake auth) and script <br />
 
 (v2)
 
-    (a) (complex) rust/axum backend <br />
+(a) (complex) rust/axum backend <br />
 
-    (b) configs, better logging, modular errors, api context <br />
+(b) configs, better logging, modular errors, api context <br />
 
-    (c) docker db (w/create;recreate;seeding), db models <br />
+(c) docker db (w/create;recreate;seeding), db models <br />
 
-    (d) (real) auth, cookies, encryption <br />
+(d) (real) auth, cookies, encryption <br />
 
-    (e) (v1 endpoints) RPC API <br />
+(e) (v1 endpoints) RPC API <br />
 
-    (f) response mapper <br />
+(f) response mapper <br />
 
-    (g) some unit tests <br />
-
-### todos
+(g) some unit tests <br />
 
 (v3)
 
-    (a) serve assets directory for frontend <br />
+(a) serve assets directory for frontend <br />
 
-    (b) serve html templates using askama <br />
+(b) serve html templates using askama (add to web::html) <br />
 
-    (c) nest all json transactions with /api/v1 and add/nest html transactions with /api/v2 <br />
+(c) nest all json transactions with /api/v1 and add/nest html transactions with
+/api/v2 <br />
 
-    (d) add json logoff and create user (/api/v1) <br />
+### todos
 
-    (e) working no-auth dynamic content (htmx) call for script getter route /api/v2 <br />
+(d) add json logoff and create user (/api/v1) <br />
+
+(e) working no-auth dynamic content (htmx) call for script getter route /api/v2
+<br />
 
 ### envs
 
