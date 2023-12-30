@@ -10,7 +10,7 @@ async fn main() -> Result<()> {
     hc.do_get("/index.html").await?.print().await?;
 
     let req_login = hc.do_post(
-        "/api/login",
+        "/api/v1/login",
         json!({
             "username": "demo1",
             "pwd": "welcome"
@@ -19,7 +19,7 @@ async fn main() -> Result<()> {
     req_login.await?.print().await?;
 
     let req_create_script = hc.do_post(
-        "/api/rpc",
+        "/api/v1/rpc",
         json!({
             "id": 1,
             "method": "create_script",
@@ -33,7 +33,7 @@ async fn main() -> Result<()> {
     req_create_script.await?.print().await?;
 
     let req_update_script = hc.do_post(
-        "/api/rpc",
+        "/api/v1/rpc",
         json!({
             "id": 1,
             "method": "update_script",
@@ -48,7 +48,7 @@ async fn main() -> Result<()> {
     req_update_script.await?.print().await?;
 
     let req_delete_script = hc.do_post(
-        "/api/rpc",
+        "/api/v1/rpc",
         json!({
             "id": 1,
             "method": "delete_script",
@@ -60,7 +60,7 @@ async fn main() -> Result<()> {
     req_delete_script.await?.print().await?;
 
     let req_list_scripts = hc.do_post(
-        "/api/rpc",
+        "/api/v1/rpc",
         json!({
             "id": 1,
             "method": "list_scripts"
@@ -69,7 +69,7 @@ async fn main() -> Result<()> {
     req_list_scripts.await?.print().await?;
 
     let req_get_script_rand = hc.do_post(
-        "/api/rpc",
+        "/api/v1/rpc",
         json!({
             "id": 1,
             "method": "get_script_rand"
@@ -78,7 +78,7 @@ async fn main() -> Result<()> {
     req_get_script_rand.await?.print().await?;
 
     let req_logoff = hc.do_post(
-        "/api/logoff",
+        "/api/v1/logoff",
         json!({
             "logoff": true
         }),
