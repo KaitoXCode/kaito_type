@@ -5,83 +5,69 @@
 <!-- head: metadata (with css) -->
 {% block head %}
 <!-- define css -->
-<style>
-  * {
-    box-sizing: border-box;
-  }
-  .column {
-    display: flex;
-    float: left;
-  }
-  .left {
-    width: 29%
-  }
-  .middle {
-    width: 48%
-  }
-  .right {
-    width: 19%
-  }
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  div {
-    margin:auto;
-  }
-</style>
+<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 {% endblock %}
 
 <!-- main body -->
 {% block content %}
 <div id="mainPage">
-  <div id="scriptConfig" style="background-color: #F2F3F4" class="row">
-    <div id="charOptionts" style="background-color: #E5E7E9; padding:1px; margin:5px" class="column left">
-      <div id="specialOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">special option</p>
+  <h2>Script Area</h2>
+  <div id="mainOuter" class="bordered">
+    <div id="scriptConfig" class="row outer">
+      <div id="charOptionts" class="column left inner">
+        <div id="specialOpt" class="column">
+          <button class="dark">special option</button>
+        </div>
+        <div id="numberOpt" class="column">
+          <button class="dark">number option</button>
+        </div>
       </div>
-      <div id="numberOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">number option</p>
+      <!-- <div class="column spacer"></div> -->
+      <!-- <div class="spacer leftSpacer">spacer1</div> -->
+      <div id="modeOptions" class="column middle inner">
+        <div id="timeOpt" class="column">
+          <button class="dark">time option</button>
+        </div>
+        <div id="wordsOpt" class="column">
+          <button class="dark">words option</button>
+        </div>
+        <div id="customOpt" class="column">
+          <button class="dark">custom option</button>
+        </div>
+      </div>
+      <!-- <div class="column spacer"></div> -->
+      <!-- <div class="spacer rightSpacer">spacer2</div> -->
+      <div id="timeOptions" class="column right inner">
+        <div id="fifteenSecOpt" class="column">
+          <button class="dark">15s</button>
+        </div>
+        <div id="thirtySecOpt" class="column">
+          <button class="dark">30s</button>
+        </div>
+        <div id="sixtySecOpt" class="column">
+          <button class="dark">60s</button>
+        </div>
+        <div id="oneTwentySecOpt" class="column">
+          <button class="dark">120s</button>
+        </div>
       </div>
     </div>
-    <!-- <div class="spacer leftSpacer">spacer1</div> -->
-    <div id="modeOptions" style="background-color: #E5E7E9; padding:1px; margin:5px" class="column middle">
-      <div id="timeOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">time option</p>
-      </div>
-      <div id="wordsOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">words option</p>
-      </div>
-      <div id="customOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">custom option</p>
-      </div>
-    </div>
-    <!-- <div class="spacer rightSpacer">spacer2</div> -->
-    <div id="timeOptions" style="background-color: #E5E7E9; padding:1px; margin:5px" class="column right">
-      <div id="fifteenSecOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">15s</p>
-      </div>
-      <div id="thirtySecOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">30s</p>
-      </div>
-      <div id="sixtySecOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">60s</p>
-      </div>
-      <div id="oneTwentySecOpt" class="column">
-        <p style="text-align:center; font-size:2vw;">120s</p>
-      </div>
-    </div>
-  </div>
-  <br>
-  <div id="outerScriptArea" style="background-color: #F2F3F4;padding:5px;">
-    <div id="innerScriptArea" style="background-color: #E5E7E9;">
-      <p style="font-size:2vw;">TODO: script area</p>
+    <br>
+    <div id="outerScriptArea" class="outer padded">
+      <div id="innerScriptArea" class="inner">
+        <div id"script">
+          <button
+            hx-get="/spawn_script"
+            hx-swap="innerHtml">
+            spawn script
+          </button>
+        </div>
+      <!-- </div> -->
     </div>
   </div>
   <!-- <button -->
   <!--   type="button" -->
-  <!--   hx-get="/api/hello" -->
+  <!--   hx-get="/api/v1/hello" -->
   <!--   hx-swap="innerHtml" -->
   <!--   class="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" -->
   <!-- > -->
