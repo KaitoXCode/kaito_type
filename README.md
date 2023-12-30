@@ -83,9 +83,13 @@
 
 (a) serve assets directory for frontend <br />
 
-(b) serve html templates using askama (add to web::html) <br />
+(b) merge html pages to the api using askama templates (create web::html mod)
+<br />
 
-(c) nest all json transactions with /api/v1 and add/nest html transactions with
+(c) nest dynamic htmx components to the api using askama templates (also in
+web::html mod) <br />
+
+(d) nest all json transactions with /api/v1 and add/nest html transactions with
 /api/v2 <br />
 
 ### todos
