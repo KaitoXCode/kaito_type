@@ -10,6 +10,7 @@ pub type Result<T> = core::result::Result<T, Error>;
 #[derive(Debug, Serialize)]
 pub enum Error {
     EntityNotFound { entity: &'static str, id: i64 },
+    NoEtitiesFound { entity: &'static str },
     // Modules
     Crypt(crypt::Error),
     Store(store::Error),
