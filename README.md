@@ -92,12 +92,12 @@ web::html mod) <br />
 (d) nest all json transactions with /api/v1 and add/nest html transactions with
 /api/v2 <br />
 
+(e) working dynamic content (htmx) call for script getter route /api/v2
+<br />
+
 ### todos
 
-(d) add json logoff and create user (/api/v1) <br />
-
-(e) working no-auth dynamic content (htmx) call for script getter route /api/v2
-<br />
+(a) add create user (/api/v1) <br />
 
 ### envs
 
