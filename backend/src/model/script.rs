@@ -63,7 +63,7 @@ impl ScriptBmc {
     // endregion:   --- /api/v1
 
     // region:      --- /api/v2
-    pub async fn get_rand(mm: &ModelManager) -> Result<Script> {
+    pub async fn get_rand(_ctx: &Ctx, mm: &ModelManager) -> Result<Script> {
         let db = mm.db();
         let script: Script = sqlx::query_as("SELECT * FROM script ORDER BY RANDOM() LIMIT 1")
             .fetch_optional(db)

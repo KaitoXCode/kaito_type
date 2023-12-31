@@ -41,9 +41,8 @@
 (e) use tailwind for css (add
 `<script src="https://cdn.tailwindcss.com"></script>` to the head)<br />
 
-(v4)
-
-(c) convert login page to dynamic aside component (/api/v2) <br />
+(c) nav bar home and login buttons should be replace page body component (htmx)
+<br />
 
 ## backend
 
@@ -95,9 +94,13 @@ web::html mod) <br />
 (e) working dynamic content (htmx) call for script getter route /api/v2
 <br />
 
+(f) add ctx (/api/v2) <br />
+
 ### todos
 
-(a) add create user (/api/v1) <br />
+(a) show not authenticated on spawn scipt button (/api/v2) <br />
+
+(b) add create user (/api/v1) <br />
 
 ### envs
 

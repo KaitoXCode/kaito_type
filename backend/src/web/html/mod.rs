@@ -1,7 +1,7 @@
 // region:      --- Modules
 mod script;
 
-use crate::{model::ModelManager, web::html::script::get_script_rand};
+use crate::{ctx::Ctx, model::ModelManager, web::html::script::get_script_rand};
 
 use askama::Template;
 use axum::{
@@ -51,8 +51,8 @@ struct LoginPageTemplate;
 // endregion:   --- Static Pages
 
 // region:      --- Dynamic Components
-async fn spawn_script(State(mm): State<ModelManager>) -> impl IntoResponse {
-    let script = get_script_rand(mm).await;
+async fn spawn_script(ctx: Ctx, State(mm): State<ModelManager>) -> impl IntoResponse {
+    let script = get_script_rand(ctx, mm).await;
     let template = match script {
         Ok(script) => SpawnScriptTemplate {
             script: script.text,
