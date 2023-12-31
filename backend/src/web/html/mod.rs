@@ -1,11 +1,17 @@
 // region:      --- Modules
+mod script;
+
+use crate::{model::ModelManager, web::html::script::get_script_rand};
+
 use askama::Template;
 use axum::{
+    extract::State,
     http::StatusCode,
     response::{Html, IntoResponse, Response},
     routing::get,
     Router,
 };
+use tracing::debug;
 // endregion:   --- Modules
 
 // region:      --- HTML Routes
@@ -16,10 +22,11 @@ pub fn routes_pages() -> Router {
         .route("/login", get(login_page))
 }
 
-pub fn routes_components() -> Router {
+pub fn routes_components(mm: ModelManager) -> Router {
     Router::new()
         // htmx componens
         .route("/html/spawn_script", get(spawn_script))
+        .with_state(mm)
 }
 
 // region:      --- Static Pages
@@ -44,11 +51,18 @@ struct LoginPageTemplate;
 // endregion:   --- Static Pages
 
 // region:      --- Dynamic Components
-async fn spawn_script() -> impl IntoResponse {
-    // FIXME: get the script from db
-    let script_text = String::from("spawned scipt #1");
-    let template = SpawnScriptTemplate {
-        script: script_text,
+async fn spawn_script(State(mm): State<ModelManager>) -> impl IntoResponse {
+    let script = get_script_rand(mm).await;
+    let template = match script {
+        Ok(script) => SpawnScriptTemplate {
+            script: script.text,
+        },
+        Err(err) => {
+            debug!("{:<12} - spawn_script - error: {err}", "TEMPLATING");
+            SpawnScriptTemplate {
+                script: format!("Failed to fetch script").to_string(),
+            }
+        }
     };
     HtmlTemplate(template)
 }
