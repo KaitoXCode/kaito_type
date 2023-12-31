@@ -46,11 +46,13 @@ async fn main() -> Result<()> {
 
     // def routes
     let routes_rpc = rpc::routes(mm.clone()).route_layer(middleware::from_fn(mw_ctx_require));
+    let routes_comps =
+        html::routes_components(mm.clone()).route_layer(middleware::from_fn(mw_ctx_require));
 
     let routes_all = Router::new()
         .merge(routes_login::routes(mm.clone()))
         .nest("/api/v1", routes_rpc)
-        .nest("/api/v2", html::routes_components())
+        .nest("/api/v2", routes_comps)
         .merge(html::routes_pages())
         .nest_service("/assets", ServeDir::new("assets"))
         .layer(middleware::map_response(mw_response_map))
