@@ -1,7 +1,7 @@
 use crate::ctx::Ctx;
 use crate::model::base::{self, DbBmc};
 use crate::model::ModelManager;
-use crate::model::Result;
+use crate::model::{Error, Result};
 use serde::{Deserialize, Serialize};
 use sqlb::Fields;
 use sqlx::FromRow;
@@ -35,6 +35,7 @@ impl DbBmc for ScriptBmc {
 /// Script specific implementation of the BMC
 /// for now 1:1 with base but this may change
 impl ScriptBmc {
+    // region:      --- /api/v1
     pub async fn create(ctx: &Ctx, mm: &ModelManager, script_c: ScriptForCreate) -> Result<i64> {
         base::create::<Self, _>(ctx, mm, script_c).await
     }
@@ -59,6 +60,19 @@ impl ScriptBmc {
     pub async fn delete(ctx: &Ctx, mm: &ModelManager, id: i64) -> Result<()> {
         base::delete::<Self>(ctx, mm, id).await
     }
+    // endregion:   --- /api/v1
+
+    // region:      --- /api/v2
+    pub async fn get_rand(mm: &ModelManager) -> Result<Script> {
+        let db = mm.db();
+        let script: Script = sqlx::query_as("SELECT * FROM script ORDER BY RANDOM() LIMIT 1")
+            .fetch_optional(db)
+            .await?
+            .ok_or(Error::NoEtitiesFound { entity: "script" })?;
+        Ok(script)
+    }
+
+    // endregion:   --- /api/v2
 }
 // endregion:   --- ScriptBmc
 
