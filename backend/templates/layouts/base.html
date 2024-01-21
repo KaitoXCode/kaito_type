@@ -12,6 +12,8 @@
     <link href="assets/imgs/favicon.ico" rel="icon" type="image/x-icon">
     <!-- htmx from the unpkg CDN - your mileage may vary -->
     <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <!-- load js -->
+    <script src="assets/js/script.js"></script>
     <!-- load css styles -->
     <link href="assets/css/styles.css" rel="stylesheet" type="text/css">
     <!-- import login button -->
@@ -23,7 +25,7 @@
     <!-- Allow any inheriting page to extend head with additional assets -->
     {% block head %}{% endblock %}
   </head>
-  <body id=mainBody>
+  <body id=mainBody hx-boost="true">
     <!-- main header used across all pages -->
     <header>
     <nav>
