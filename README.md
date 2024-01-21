@@ -102,6 +102,16 @@ web::html mod) <br />
 
 (b) add create user (/api/v1) <br />
 
+## fullstack
+
+### done
+
+(n/a)
+
+### todos
+
+(v1) make the script area work
+
 ### envs
 
 git ignored /backend/.cargo/config.toml file
