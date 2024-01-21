@@ -1,16 +1,22 @@
 // region:      --- Modules
 mod script;
 
-use crate::{ctx::Ctx, model::ModelManager, web::html::script::get_script_rand};
+use crate::{
+    ctx::Ctx,
+    model::ModelManager,
+    web::html::script::{calculate_accuracy, calculate_speed, get_script_rand},
+};
 
 use askama::Template;
 use axum::{
-    extract::State,
+    extract::{Form, State},
     http::StatusCode,
     response::{Html, IntoResponse, Response},
-    routing::get,
-    Router,
+    routing::{get, post},
+    Json, Router,
 };
+use serde::Deserialize;
+use std::fmt::Display;
 use tracing::debug;
 // endregion:   --- Modules
 
@@ -26,10 +32,12 @@ pub fn routes_components(mm: ModelManager) -> Router {
     Router::new()
         // htmx componens
         .route("/html/spawn_script", get(spawn_script))
+        .route("/html/check_script", post(check_script))
         .with_state(mm)
 }
 
 // region:      --- Static Pages
+// home
 async fn root_home() -> impl IntoResponse {
     let template = RootTemplate {};
     HtmlTemplate(template)
@@ -39,6 +47,7 @@ async fn root_home() -> impl IntoResponse {
 #[template(path = "pages/root.html")]
 struct RootTemplate;
 
+// login
 async fn login_page() -> impl IntoResponse {
     let template = LoginPageTemplate {};
     HtmlTemplate(template)
@@ -51,6 +60,52 @@ struct LoginPageTemplate;
 // endregion:   --- Static Pages
 
 // region:      --- Dynamic Components
+// check_script
+async fn check_script(
+    _ctx: Ctx,
+    State(_mm): State<ModelManager>,
+    Form(payload): Form<CheckPayload>,
+) -> impl IntoResponse {
+    // fetch inputs
+    let CheckPayload {
+        user_input,
+        script,
+        elapsed_time,
+    } = payload;
+    // check
+    let accuracy = calculate_accuracy(&user_input, &script).await;
+    let speed = calculate_speed(&user_input, &elapsed_time).await;
+    debug!("{:<12} - check_script - CheckPayload: {speed}\n\n", "DEBUG");
+    // // err handling and resp gen
+    // let template = CheckScriptTemplate { accuracy, speed };
+    // HtmlTemplate(template)
+}
+
+#[derive(Debug, Deserialize)]
+struct CheckPayload {
+    user_input: String,
+    script: String,
+    elapsed_time: String,
+}
+
+impl Display for CheckPayload {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}.{}.{}",
+            &self.user_input, &self.script, &self.elapsed_time,
+        )
+    }
+}
+
+#[derive(Template)]
+#[template(path = "components/check_script.html")]
+struct CheckScriptTemplate {
+    accuracy: f64,
+    speed: f64,
+}
+
+// spawn_script
 async fn spawn_script(ctx: Ctx, State(mm): State<ModelManager>) -> impl IntoResponse {
     let script = get_script_rand(ctx, mm).await;
     let template = match script {
@@ -72,6 +127,7 @@ async fn spawn_script(ctx: Ctx, State(mm): State<ModelManager>) -> impl IntoResp
 struct SpawnScriptTemplate {
     script: String,
 }
+
 // endregion:   --- Dynamic Components
 
 // region:      --- Templating Boilerplate
