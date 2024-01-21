@@ -1,9 +1,53 @@
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#text-container {
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+#results-container {
+  font-weight: bold;
+  color: green;
+}
 /* region:    --- base */
 body {
   font-family: "Courier New", monospace;
-  /* background-color: #323437; */
   background-color: #000000;
+  color: #d1d0c5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
 }
+/**/
+/* #script { */
+/*   text-align: center; */
+/* } */
+/**/
+/* #expectedText { */
+/*   font-size: 18px; */
+/* } */
+/**/
+/* #userInput { */
+/*   margin-top: 10px; */
+/*   padding: 5px; */
+/*   font-size: 16px; */
+/* } */
+/**/
+/* #feedback { */
+/*   margin-top: 10px; */
+/*   font-size: 14px; */
+/* } */
 /* endregion: --- base */
 
 /* region:    --- root */
