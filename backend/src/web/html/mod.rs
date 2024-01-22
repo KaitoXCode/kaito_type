@@ -13,7 +13,7 @@ use axum::{
     http::StatusCode,
     response::{Html, IntoResponse, Response},
     routing::{get, post},
-    Json, Router,
+    Router,
 };
 use serde::Deserialize;
 use std::fmt::Display;
@@ -86,6 +86,12 @@ async fn check_script(
     );
     // check
     let accuracy = calculate_accuracy(&user_input, &script).await;
+    // convert {00:00:00} to seconds
+    let elapsed_time = elapsed_time
+        .split(":")
+        .map(|x| x.parse::<i64>().unwrap())
+        .collect::<Vec<i64>>();
+    let elapsed_time = elapsed_time[0] * 3600 + elapsed_time[1] * 60 + elapsed_time[2];
     let speed = calculate_speed(&user_input, &elapsed_time).await;
     debug!(
         "{:<12} - check_script - CheckPayload: {accuracy}\n\n",
