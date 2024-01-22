@@ -72,18 +72,6 @@ async fn check_script(
         script,
         elapsed_time,
     } = payload;
-    debug!(
-        "{:<12} - check_script - CheckPayload: {user_input}\n\n",
-        "CHECK_SCRIPT"
-    );
-    debug!(
-        "{:<12} - check_script - CheckPayload: {script}\n\n",
-        "CHECK_SCRIPT"
-    );
-    debug!(
-        "{:<12} - check_script - CheckPayload: {elapsed_time}\n\n",
-        "CHECK_SCRIPT"
-    );
     // check
     let accuracy = calculate_accuracy(&user_input, &script).await;
     // convert {00:00:00} to seconds
@@ -93,17 +81,9 @@ async fn check_script(
         .collect::<Vec<i64>>();
     let elapsed_time = elapsed_time[0] * 3600 + elapsed_time[1] * 60 + elapsed_time[2];
     let speed = calculate_speed(&user_input, &elapsed_time).await;
-    debug!(
-        "{:<12} - check_script - CheckPayload: {accuracy}\n\n",
-        "CHECK_SCRIPT"
-    );
-    debug!(
-        "{:<12} - check_script - CheckPayload: {speed}\n\n",
-        "CHECK_SCRIPT"
-    );
-    // // err handling and resp gen
-    // let template = CheckScriptTemplate { accuracy, speed };
-    // HtmlTemplate(template)
+    // err handling and resp gen
+    let template = CheckScriptTemplate { accuracy, speed };
+    HtmlTemplate(template)
 }
 
 #[derive(Debug, Deserialize)]

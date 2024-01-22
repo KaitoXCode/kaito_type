@@ -15,7 +15,7 @@ pub async fn calculate_accuracy(user_input: &str, script: &str) -> f64 {
         .filter(|(a, b)| a == b)
         .count();
     let total_chars: usize = script.chars().count();
-    (correct_chars as f64 / total_chars as f64) * 100.0
+    ((correct_chars as f64 / total_chars as f64) * 100.0).round()
 }
 
 pub async fn calculate_speed(user_input: &str, elapsed_time: &i64) -> f64 {
